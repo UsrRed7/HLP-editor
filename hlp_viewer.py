@@ -320,6 +320,18 @@ def main(args):
 
     pygame.display.set_caption("HLP editor")
 
+    icon = pygame.Surface((64, 64), pygame.SRCALPHA)
+    icon.blit(DUST, (32, 32))
+    icon.blit(pygame.transform.rotate(COMPARATOR, 270), (16, 16))
+    icon.blit(BARREL, (0, 16))
+    icon.blit(BARREL, (48, 48))
+    icon.blit(COMPARATOR, (32, 16))
+    icon.blit(COMPARATOR, (48, 32))
+    icon.blit(BLOCK, (32, 0))
+    icon.blit(BLOCK, (48, 16))
+
+    pygame.display.set_icon(icon)
+
     # Setup of the 3 main features of the viewer
     window = pygame.display.set_mode(WINDOWSIZE, pygame.RESIZABLE)
     grid = Grid(GRIDPOSITION, MAXLAYERS, GRIDSCALE)
