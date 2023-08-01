@@ -9,7 +9,7 @@ This program is intended to be a convenient way to visulize and test a given fun
 * [Interfaces](#interfaces)
 * [Function representation](#function-representation)
 * [FAQ](#faq)
-* [Contributing]()
+* [Contributing](#contributing)
 
 ## What's the problem?
 
