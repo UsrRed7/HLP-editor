@@ -7,6 +7,7 @@ This program is intended to be a convenient way to visulize and test a given fun
 * [About the problem](#whats-the-problem)
 * [How to use](#usage)
 * [Interfaces](#interfaces)
+* [Function representation](#function-representation)
 * [FAQ](#faq)
 
 ## What's the problem?
@@ -35,7 +36,7 @@ To use this program, you will need a python interpreter.
 First you must download the source. Whether with a git clone or a simple download and unzip doesn't matter, though for most downloading and unzipping may be simplest.
 
 Then open your python interpreter and before running it the first time, do a quick:
-```
+```bash
 pip install pygame pygame_textinput pyperclip
 ```
 
@@ -49,33 +50,54 @@ If any issues are encountered, please first consult the FAQ and closed issues, t
 
 There isn't a dedicated in-app usage or help menu (or a menu of any kind at this time). Though the controls should be quite intuitive, they are all detailed here:
 
-1. Copy/Paste  
-The stardard `ctrl+c` and `ctrl+v` are used to copy/paste the entire string.
-2. Control string movements  
-Using `ctrl` in conjunction with `backspace`, `depete`, and the left/right arrow keys will perform the associoated action until a space or the end of the line is met.
-3. To string  
-Pressing `alt` will replace the current string with a string representation of the current function.
-4. From string  
-Pressing `enter`/`return` will attempt to parse the current string and updates the current function if successful, otherwise your cursor position will be reset to the beginning of the string and you will see and error message including the layer number the error was encountered on.
-5. Pan  
+1. Function maipulation  
+To manipulate the current function, left/right click on the comparators, barrels, and the add/delete button.  
+* Left clicking on the barrels will increase their value, right clicking will decrease it. The value will automatically loop.
+* Clicking with either mouse button on the comprators will toggle its state.
+* To add/remove a layer click the add/delete button with the respective left/right mouse buttons wherever you want to add/remove a layer.
+2. Pan  
 To pan, simply hold _any_ button on your mouse and simply drag it around.
-6. Zoom  
+3. Zoom  
 Wouldn't you know!? Just scroll in and out with your mouse wheel.
-7. Function maipulation  
-To manipulate the current function, just start clicking on it, and the output will automatically update live. Left/right clicking on the barrels will decrease/increase the value it's storing, and clicking with either on the forward facing comprators with toggle its state. (The state of the comparator facing sideways doesn't matter)  
-To add/remove a layer click the respective left/right mouse buttons at whatever location in the function you wish
+4. Copy/Paste  
+The stardard `ctrl+c` and `ctrl+v` are used to copy/paste the entire string.
+5. `ctrl` string movements  
+Using `ctrl` in conjunction with `backspace`, `delete`, or the left/right arrow keys will perform the associoated action until a passing a space or meeting an end of the line.
+6. To string  
+Pressing `alt` will replace the current string with a string representation of the current function.
+7. From string  
+Pressing `enter`/`return` will attempt to parse the current string and updates the current function if successful, otherwise your cursor position will be reset to the beginning of the string and you will see an error message including the layer number the error was encountered on.
 
-TODO: string represation exapmle/explanation
+
+## Function representation
+
+The string representation of a function can be understood from an example: ![example_1](/screenshots/example1.png)  
+As can be seen, it's a fairly simple system with input to output going from left to right.
+* Each layer is seperated by a semicolon.
+* Each layer has two parts, the side and the back seperated by a comma.
+* Each part has a number that may be preceded by an asterisk, which indicates the state of the comparator.
+    * Numbers must be 0-15 or 0-F.
+
+The parser implementation is space-agnostic, so unless you put a space between a two digit number (`14` -> `1 4`) they don't matter to the parser.  
+The presence of an asterisk indicates the comparator is in subtract mode (on), its absence indicates compare mode (off).  
+Any other unexpected/unknown characters will almost certainly confuse the parser and give an error.
 
 ## FAQ
 
-TODO: add any more basic ones that you can think of
-* No such file/directory: make sure you are in the right directory.
-* I'm getting errors that say: `No module named '...'`  
-Double check you ran the above `pip install` command. If you still get module errors after installing the new packages, you can try running:
-```
+* Q: When I try to run it it just says: `'hlp-viewer.py' is not recognized as an internal or external command, operable program or batch file.`  
+A: Please make sure make sure you are in the right directory.
+
+* Q: I'm getting errors that say: `No module named '...'`  
+A: Double check you ran the above `pip install` command. If you still get module errors after installing the packages, you can try forcefully re-installing all the modules:
+```bash
 pip install --force-reinstall pygame pygame_textinput pyperclip
 ```
-to forcefully re-install all the external packages this program uses
-* String error? double check syntax where the error says, then make sure to remove the error.
-* It's super jittery when I pan: this is simply becaue by default the refresh rate is set to 20 FPS. You can change this by simply opening the python file in any text editor and modify the `FRAMERATE` value to whatever you want.
+
+* Q: Even after fixing the error in my string, it still says there's an error.  
+A: Double check your syntax in the layer the error says, then **make sure to remove the error**.
+
+* Q: Why is it so jittery when I pan?  
+A: This is simply becaue by default the refresh rate is set to 20 FPS. You can change this by simply opening the python file in any text editor and modify the `FRAMERATE` value to whatever you want.
+
+* Q: The side comparator isn't working.  
+A: The state of sideways comparator to the furthest left in each layer doesn't actually affect the function in any way, and thus isn't considered a button. **The side comparator referrs to the upwards facing comparator in the middle**. Directly to it's right and down one is the 'back' comparator. 
