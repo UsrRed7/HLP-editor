@@ -9,6 +9,7 @@ This program is intended to be a convenient way to visulize and test a given fun
 * [Interfaces](#interfaces)
 * [Function representation](#function-representation)
 * [FAQ](#faq)
+* [Contributing]()
 
 ## What's the problem?
 
@@ -100,4 +101,16 @@ A: Double check your syntax in the layer the error says, then **make sure to rem
 A: This is simply becaue by default the refresh rate is set to 20 FPS. You can change this by simply opening the python file in any text editor and modify the `FRAMERATE` value to whatever you want.
 
 * Q: The side comparator isn't working.  
-A: The state of sideways comparator to the furthest left in each layer doesn't actually affect the function in any way, and thus isn't considered a button. **The side comparator referrs to the upwards facing comparator in the middle**. Directly to it's right and down one is the 'back' comparator. 
+A: The state of sideways comparator to the furthest left in each layer doesn't actually affect the function in any way, and thus isn't considered a button. **The side comparator referrs to the upwards facing comparator in the middle**. Directly to it's right and down one is the 'back' comparator.
+
+## Contributing
+
+Any contributions/ideas you have to improve this application and this repo as a whole are welcome! All the code is in the single python file, and beyond changing the default values at the top of the file for your own prefrences, the code itself is quite structured and is commented throughout.
+
+Whatever your idea is, you may submit an issue labeled as an enhancement if you want feedback before implementing it, or simply submitting a pull request with your change.
+
+Some current ideas that I don't intend to implement myself at this time:
+* More robust parser, perhaps the ability to parse additional function syntaxes
+* Perhaps a better string error system?
+* Alternate text font(s)
+* Additional functionality to generate .schem files of the function for easy importation to Minecraft
